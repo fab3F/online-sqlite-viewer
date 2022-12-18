@@ -75,9 +75,34 @@
 </head>
 <body>
 
-<img src="img/icon.png" style="display: none;"/>
+<!-- Navigation -->
+<nav id="home" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#home"><b>fab3F</b> Homepage</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">Über mich</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#projects">Projekte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Kontakt</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<div id="main-container" class="container">
+
+<div id="content" class="container">
     <div id="header">
         <div class="row">
             <div class="col-xs-6">
@@ -154,28 +179,41 @@
     <div class="alert alert-info box" style="display: none"></div>
 </div>
 
-<div id="bottom-bar" class="text-center">
-    <div class="inline">
-        <button class="btn btn-default btn-sm " id="page-prev" type="submit" onclick="setPage(this, false)"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
-        <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" onclick="setPage(this)" id="pager"></a>
-        <button class="btn btn-default btn-sm " id="page-next" type="submit" onclick="setPage(this, true)"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-    </div>
-</div>
+<!-- Footer -->
+<footer id="footer" class="footer-distributed">
+  <div class="footer-right">
+    
+    <a href="https://fab3F.github.io/link/youtube"><i class="fa fa-youtube"></i></a>
+    <a href="https://fab3F.github.io/link/twitter"><i class="fa fa-twitter"></i></a>
+    <a href="https://fab3F.github.io/link/instagram"><i class="fa fa-instagram"></i></a>
+    <a href="https://fab3F.github.io/link/github"><i class="fa fa-github"></i></a>
+    <a href="https://fab3F.github.io/link/discord"><i class="fa fa-discord" aria-hidden="true"></i></a>
+    
+  </div>
+  <div class="footer-left">
 
+    <p class="footer-links">
+      <a class="link-1" href="#home">Home</a>
+      <a href="#projects">Projekte</a>
+      <a href="#contact">Kontakt</a>
+      <a href="/idn">Impressum, Datenschutz & Nutzungsbedingungen</a>
+    </p>
+    
+    <p class="footer-emailtext">E-Mail: 
+      <a class="footer-emaillink" href="mailto:kontakt@help.info.gf">kontakt@help.info.gf</a>
+    </p>
+  </div>
+</footer>
 
-
-<input type="file" id="dropzone-dialog" style="opacity: 0;display:none">
-
-
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/filereader.js"></script>
-<script src="js/sql.js"></script>
-<script src="js/select2.min.js"></script>
-<script src="js/ace/ace.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/mindmup-editabletable.js"></script>
-<script src="js/main.js?v=11"></script>
-
+<!-- Scripts -->
+<script src="/online-sqlite-viewer/js/jquery-1.11.3.min.js"></script>
+<script src="/online-sqlite-viewer/js/filereader.js"></script>
+<script src="/online-sqlite-viewer/js/sql.js"></script>
+<script src="/online-sqlite-viewer/js/select2.min.js"></script>
+<script src="/online-sqlite-viewer/js/ace/ace.js"></script>
+<script src="/online-sqlite-viewer/js/bootstrap.min.js"></script>
+<script src="/online-sqlite-viewer/js/mindmup-editabletable.js"></script>
+<script src="/online-sqlite-viewer/js/main.js?v=11"></script>
 <script>
     function onKeyDown(e) {
         if ((e.ctrlKey || e.metaKey) && e.which == 13) {
