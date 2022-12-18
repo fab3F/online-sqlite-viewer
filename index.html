@@ -102,81 +102,59 @@
 </nav>
 
 
-<div id="content" class="container">
-    <div id="header">
-        <div class="row">
-            <div class="col-xs-6">
-                <img src="img/logo.svg" class="img-responsive pull-left" style="margin-right: 16px;"/>
-                <h3>SQLite Viewer</h3>
-                <p>view sqlite file online</p>
-            </div>
-            <div class="col-xs-6">
-                <a href="#" id="resizer" class="pull-right">
-                    <i class="glyphicon glyphicon-resize-full"></i>
-                </a>
-            </div>
+  <div id="compat-error" class="alert alert-danger" style="display: none">
+      <div class="clearfix">
+          <img src="/online-sqlite-viewer/img/seriously.png" class="img-responsive pull-left"/>
+          <p>Sorry, aber dein Browser unterstützt anscheinend die neusten HTML5 Features noch nicht. Hast du schon versucht, auf die neuste Version zu aktualisieren?</p>
+      </div>
+  </div>
+
+  <div class="panel panel-info" id="dropzone" onclick="dropzoneClick(this)">
+    <div id="drop-text" class="panel-body">
+      <b>Datei hier ablegen</b> oder hier in das Feld klicken, um den Inhalt anzuzeigen<br/>
+        <div class="nouploadinfo small">Keine Datei ausgewählt - es werden nur HTML5 und JavaScript verwendet.<br/><br/>
         </div>
+          
+        <a id="sample-db-link" class="no-propagate small" href="/online-sqlite-viewer/downloads/example.sqlite">... oder diese Beispiel-Datei herunterladen und ausprobieren</a>
+      </div>
+      <div id="drop-loading" class="panel-body" style="display: none">
+          <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <b>Verarbeite Datei ...</b>
+      </div>
+  </div>
+
+  <div id="output-box" class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <select id="tables" class="form-control select2" title="Table"></select><br />
+      </div>
+
+      <div class="col-md-11">
+        <div id="sql-editor" class="panel panel-default form-control form-control-lg" onkeydown="onKeyDown(event)"></div>
+      </div>
+
+      <div class="col-sm-1">
+        <button class="btn btn-sm btn-primary" id="sql-run" type="submit" onclick="executeSql(this)">Execute</button>
+      </div>
+
+      <div class="col-md-12">
+        <div style="overflow-x: auto">
+          <table id="data" class="table table-condensed table-bordered table-hover table-striped">
+            <thead>
+              <tr></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="alert alert-danger box" id="error" style="display: none">
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div id="compat-error" class="alert alert-danger" style="display: none">
-        <div class="clearfix">
-            <img src="img/seriously.png" class="img-responsive pull-left"/>
-            <p>Sorry but your browser does not support some of new HTML5 features! Try using latest version of Google Chrome or
-                Firefox.</p>
-        </div>
-    </div>
+  <div class="alert alert-danger box" style="display: none"></div>
+  <div class="alert alert-warning box" style="display: none"></div>
+  <div class="alert alert-info box" style="display: none"></div>
 
-    <div class="panel panel-info" id="dropzone" onclick="dropzoneClick(this)">
-        <div id="drop-text" class="panel-body">
-            <b>Drop file here</b> to load content or click on this box to open file dialog.<br/>
-
-            <div class="nouploadinfo small">No file will be uploaded - uses only JavaScript HTML5 FileReader.<br/><br/>
-            </div>
-            
-            <a id="sample-db-link" class="no-propagate small" href="examples/Chinook_Sqlite.sqlite">&hellip; or download &amp; try this sample file</a>
-        </div>
-        <div id="drop-loading" class="panel-body" style="display: none">
-            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <b>Processing file ...</b>
-        </div>
-    </div>
-
-    <div id="output-box" class="container-fluid">
-
-        <div class="row">
-            <div class="col-md-12">
-                <select id="tables" class="form-control select2" title="Table"></select><br />
-            </div>
-
-            <div class="col-md-11">
-                <div id="sql-editor" class="panel panel-default form-control form-control-lg" onkeydown="onKeyDown(event)"></div>
-            </div>
-
-            <div class="col-sm-1">
-                <button class="btn btn-sm btn-primary" id="sql-run" type="submit" onclick="executeSql(this)">Execute</button>
-            </div>
-
-            <div class="col-md-12">
-
-                <div style="overflow-x: auto">
-                    <table id="data" class="table table-condensed table-bordered table-hover table-striped">
-                        <thead>
-                        <tr></tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
-                <div class="alert alert-danger box" id="error" style="display: none"></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="alert alert-danger box" style="display: none"></div>
-    <div class="alert alert-warning box" style="display: none"></div>
-    <div class="alert alert-info box" style="display: none"></div>
 </div>
 
 <!-- Footer -->
