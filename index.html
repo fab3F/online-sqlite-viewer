@@ -61,7 +61,7 @@
 </script>
 
 <!-- SQL Stylesheets -->
-<link href="/online-sqlite-viewer/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/online-sqlite-viewer/css/select2.css" rel="stylesheet">
 <link href="/online-sqlite-viewer/css/select2-bootstrap.css" rel="stylesheet">
 <link href="/online-sqlite-viewer/css/main.css" rel="stylesheet">
@@ -101,6 +101,8 @@
   </div>
 </nav>
 
+<!-- Content -->
+<div id="content" class="container">
 
   <div id="compat-error" class="alert alert-danger" style="display: none">
       <div class="clearfix">
@@ -133,7 +135,7 @@
       </div>
 
       <div class="col-sm-1">
-        <button class="btn btn-sm btn-primary" id="sql-run" type="submit" onclick="executeSql(this)">Execute</button>
+        <button class="btn btn-sm btn-primary" id="sql-run" type="submit" onclick="executeSql(this)">Ausführen</button>
       </div>
 
       <div class="col-md-12">
@@ -156,6 +158,8 @@
   <div class="alert alert-info box" style="display: none"></div>
 
 </div>
+
+<input type="file" id="dropzone-dialog" style="opacity: 0;display:none">
 
 <!-- Footer -->
 <footer id="footer" class="footer-distributed">
