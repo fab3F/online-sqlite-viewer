@@ -115,18 +115,20 @@
       </div>
   </div>
 
-  <div class="panel panel-info" id="dropzone" onclick="dropzoneClick(this)">
-    <div id="drop-text" class="panel-body">
-      <b>Datei hier ablegen</b> oder hier in das Feld klicken, um den Inhalt anzuzeigen<br/>
-        <div class="nouploadinfo small">Keine Datei ausgewählt - es werden nur HTML5 und JavaScript verwendet.<br/><br/>
+  <section class="py-5">
+    <div class="panel panel-info" id="dropzone" onclick="dropzoneClick(this)">
+      <div id="drop-text" class="panel-body">
+        <b>Datei hier ablegen</b> oder hier in das Feld klicken, um den Inhalt anzuzeigen<br/>
+          <div class="nouploadinfo small">Keine Datei ausgewählt - es werden nur HTML5 und JavaScript verwendet.<br/><br/>
+          </div>  
+          <a id="sample-db-link" class="no-propagate small" href="/online-sqlite-viewer/downloads/example.sqlite">... oder diese Beispiel-Datei herunterladen und ausprobieren</a>
         </div>
-          
-        <a id="sample-db-link" class="no-propagate small" href="/online-sqlite-viewer/downloads/example.sqlite">... oder diese Beispiel-Datei herunterladen und ausprobieren</a>
+        <div id="drop-loading" class="panel-body" style="display: none">
+            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <b>Verarbeite Datei ...</b>
+        </div>
       </div>
-      <div id="drop-loading" class="panel-body" style="display: none">
-          <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <b>Verarbeite Datei ...</b>
-      </div>
-  </div>
+    </div>
+  </section>
 
   <div id="output-box" class="container-fluid">
     <div class="row">
