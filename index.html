@@ -109,23 +109,22 @@
 <div id="content" class="container">
 
   <div id="compat-error" class="alert alert-danger" style="display: none">
-      <div class="clearfix">
-          <img src="/online-sqlite-viewer/img/seriously.png" class="img-responsive pull-left"/>
-          <p>Sorry, aber dein Browser unterstützt anscheinend die neusten HTML5 Features noch nicht. Hast du schon versucht, auf die neuste Version zu aktualisieren?</p>
-      </div>
+    <div class="clearfix">
+      <img src="/online-sqlite-viewer/img/seriously.png" class="img-responsive pull-left">
+      <p>Sorry, aber dein Browser unterstützt anscheinend die neusten HTML5 Features noch nicht. Hast du schon versucht, auf die neuste Version zu aktualisieren?</p>
+    </div>
   </div>
 
   <section class="py-5">
     <div class="panel panel-info" id="dropzone" onclick="dropzoneClick(this)">
       <div id="drop-text" class="panel-body">
         <b>Datei hier ablegen</b> oder hier in das Feld klicken, um den Inhalt anzuzeigen<br/>
-          <div class="nouploadinfo small">Keine Datei ausgewählt - es werden nur HTML5 und JavaScript verwendet.<br/><br/>
-          </div>  
-          <a id="sample-db-link" class="no-propagate small" href="/online-sqlite-viewer/downloads/example.sqlite">... oder diese Beispiel-Datei herunterladen und ausprobieren</a>
-        </div>
-        <div id="drop-loading" class="panel-body" style="display: none">
-            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> <b>Verarbeite Datei ...</b>
-        </div>
+        <div class="nouploadinfo small">Keine Datei ausgewählt - es werden nur HTML5 und JavaScript verwendet.<br/><br/>
+        </div>  
+        <a id="sample-db-link" class="no-propagate small" href="/online-sqlite-viewer/downloads/example.sqlite">... oder diese Beispiel-Datei herunterladen und ausprobieren</a>
+      </div>
+      <div id="drop-loading" class="panel-body" style="display: none">
+          <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span><b>Verarbeite Datei ...</b>
       </div>
     </div>
   </section>
@@ -133,7 +132,7 @@
   <div id="output-box" class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <select id="tables" class="form-control select2" title="Table"></select><br />
+        <select id="tables" class="form-control select2" title="Table"></select><br/>
       </div>
 
       <div class="col-md-11 mb-4">
