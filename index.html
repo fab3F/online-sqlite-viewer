@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/classes.css"type="text/css">
 <link rel="stylesheet" href="/css/styles.css" type="text/css">
 <link rel="stylesheet" href="/css/footer.css" type="text/css">
+<link rel="stylesheet" href="/css/cookies.css" type="text/css">
 
 <!--Footer Social Media Icons Stylesheet-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css" integrity="sha256-XoaMnoYC5TH6/+ihMEnospgm0J1PM/nioxbOUdnM8HY=" crossorigin="anonymous">
@@ -54,15 +55,8 @@
 <!-- Google Search canonical -->
 <link rel="canonical" href="https://fab3F.github.io/online-sqlite-viewer" />
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YL9HZNY8V4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YL9HZNY8V4');
-</script>
+<!-- Cookies -->
+<script src="/js/cookies.js" defer></script>
 
 <!-- SQL Stylesheets -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -79,136 +73,169 @@
 </head>
 <body>
 
-<!-- Navigation -->
-<nav id="home" class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container">
-    <a href="#home"><img src="images/fab3F.png" class="logo responsive" alt="fab3F Logo"></a>
-    <a class="navbar-brand" href="#home">Homepage</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#about">Über mich</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#projects">Projekte</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">Kontakt</a>
-        </li>
-      </ul>
+  <!-- Cookie Popup -->
+  <div id="cookie-popup">
+    <div id="cookie-content">
+      <h2>Datenschutzeinstellungen</h2>
+      <p>Wir verwenden Cookies und ähnliche Technologien, um sicherzustellen, dass wir Ihnen die bestmögliche Erfahrung auf unserer Website bieten können. Sie können Ihre Einstellungen jederzeit in der Fußzeile ändern. 
+        Weitere Informationen dazu finden Sie hier:</p>
+      <p><a href="/idn">Impressum, Datenschutz & Nutzungsbedingungen</a></p>
+      <div class="cookie-button-container">
+        <button id="cookie-accept-all">Alle Akzeptieren</button>
+        <button id="cookie-reject-all">Alle Ablehnen</button>
+        <button id="cookie-settings">Einstellungen</button>
+      </div>
     </div>
-  </div>
-</nav>
-
-<!-- Content -->
-<div id="content" class="container">
-
-  <div id="compat-error" class="alert alert-danger" style="display: none">
-    <div class="clearfix">
-      <img src="/online-sqlite-viewer/img/seriously.png" class="img-responsive pull-left">
-      <p>Sorry, aber dein Browser unterstützt anscheinend die neusten HTML5 Features noch nicht. Hast du schon versucht, auf die neuste Version zu aktualisieren?</p>
+    <div id="cookie-settings-content">
+      <h2>Einstellungen</h2>
+      <p>Bitte wählen Sie aus, welche Cookies und ähnliche Technologien auf dieser Website verwendet werden dürfen.</p>
+      <form>
+        <h4>Analyse-Technologien und Cookies:</h4>
+        <input type="checkbox" id="switch_gtm" name="gtm" checked/><label for="switch_gtm" class="switch-label">Toggle_GTM</label>
+        <h5 class="cookie-name">Google Tag Manager</h5>
+        <p>Tool, mit dem Tags und Tracking-Codes einer Website zentral verwaltet und auf der Website eingefügt werden können, um das Nutzerverhalten zu messen und zu analysieren.</p>
+        <input type="checkbox" id="switch_ga" name="ga" checked/><label for="switch_ga" class="switch-label">Toggle_GA</label>
+        <h5 class="cookie-name">Google Analytics</h5>
+        <p>Ein Web-Analyse-Tool zu Analyse des Besucherverhaltens, um Erkenntnisse darüber zu gewinnen, wie Nutzer mit der Website interagieren und wie die Website verbessert werden kann.</p>
+      </form>
+      <div class="cookie-button-container">
+        <button id="cookie-save" onclick="saveCookieSettings()">Auswahl speichern</button>
+        <button id="cookie-back" onclick="showCookiePopup()">Zurück</button>
+      </div>
     </div>
   </div>
 
-  <section class="py-5">
-    <div class="panel panel-info" id="dropzone" onclick="dropzoneClick(this)">
-      <div id="drop-text" class="panel-body">
-        <b>Datei hier ablegen</b> oder hier in das Feld klicken, um den Inhalt anzuzeigen<br/>
-        <div class="nouploadinfo small">Keine Datei ausgewählt - es werden nur HTML5 und JavaScript verwendet.<br/><br/>
-        </div>  
-        <a id="sample-db-link" class="no-propagate small" href="/online-sqlite-viewer/downloads/example.sqlite">... oder diese Beispiel-Datei herunterladen und ausprobieren</a>
-      </div>
-      <div id="drop-loading" class="panel-body" style="display: none">
-          <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span><b>Verarbeite Datei ...</b>
+  <!-- Navigation -->
+  <nav id="home" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a href="#home"><img src="images/fab3F.png" class="logo responsive" alt="fab3F Logo"></a>
+      <a class="navbar-brand" href="#home">Homepage</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">Über mich</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#projects">Projekte</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Kontakt</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <div id="output-box" class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <select id="tables" class="form-control select2" title="Table"></select><br/>
+  <!-- Content -->
+  <div id="content" class="container">
+
+    <div id="compat-error" class="alert alert-danger" style="display: none">
+      <div class="clearfix">
+        <img src="/online-sqlite-viewer/img/seriously.png" class="img-responsive pull-left">
+        <p>Sorry, aber dein Browser unterstützt anscheinend die neusten HTML5 Features noch nicht. Hast du schon versucht, auf die neuste Version zu aktualisieren?</p>
       </div>
+    </div>
 
-      <div class="col-md-11 mb-4">
-        <div id="sql-editor" class="panel panel-default form-control form-control-lg" onkeydown="onKeyDown(event)"></div>
-      </div>
-
-      <div class="col-sm-1">
-        <button class="btn btn-sm btn-primary" id="sql-run" type="submit" onclick="executeSql(this)">Ausführen</button>
-      </div>
-
-      <div class="col-md-12">
-        <div style="overflow-x: auto">
-          <table id="data" class="table table-condensed table-bordered table-hover table-striped">
-            <thead>
-              <tr></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+    <section class="py-5">
+      <div class="panel panel-info" id="dropzone" onclick="dropzoneClick(this)">
+        <div id="drop-text" class="panel-body">
+          <b>Datei hier ablegen</b> oder hier in das Feld klicken, um den Inhalt anzuzeigen<br/>
+          <div class="nouploadinfo small">Keine Datei ausgewählt - es werden nur HTML5 und JavaScript verwendet.<br/><br/>
+          </div>  
+          <a id="sample-db-link" class="no-propagate small" href="/online-sqlite-viewer/downloads/example.sqlite">... oder diese Beispiel-Datei herunterladen und ausprobieren</a>
         </div>
-        <div class="alert alert-danger box" id="error" style="display: none">
+        <div id="drop-loading" class="panel-body" style="display: none">
+            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span><b>Verarbeite Datei ...</b>
+        </div>
+      </div>
+    </section>
+
+    <div id="output-box" class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <select id="tables" class="form-control select2" title="Table"></select><br/>
+        </div>
+
+        <div class="col-md-11 mb-4">
+          <div id="sql-editor" class="panel panel-default form-control form-control-lg" onkeydown="onKeyDown(event)"></div>
+        </div>
+
+        <div class="col-sm-1">
+          <button class="btn btn-sm btn-primary" id="sql-run" type="submit" onclick="executeSql(this)">Ausführen</button>
+        </div>
+
+        <div class="col-md-12">
+          <div style="overflow-x: auto">
+            <table id="data" class="table table-condensed table-bordered table-hover table-striped">
+              <thead>
+                <tr></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="alert alert-danger box" id="error" style="display: none">
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="alert alert-danger box" style="display: none"></div>
+    <div class="alert alert-warning box" style="display: none"></div>
+    <div class="alert alert-info box" style="display: none"></div>
+
   </div>
 
-  <div class="alert alert-danger box" style="display: none"></div>
-  <div class="alert alert-warning box" style="display: none"></div>
-  <div class="alert alert-info box" style="display: none"></div>
+  <input type="file" id="dropzone-dialog" style="opacity: 0;display:none">
 
-</div>
+  <!-- Footer -->
+  <footer id="footer" class="footer-distributed">
+    <div class="footer-right">
+      
+      <a href="https://fab3F.github.io/link/youtube"><i class="fa fa-youtube"></i></a>
+      <a href="https://fab3F.github.io/link/twitter"><i class="fa fa-twitter"></i></a>
+      <a href="https://fab3F.github.io/link/instagram"><i class="fa fa-instagram"></i></a>
+      <a href="https://fab3F.github.io/link/github"><i class="fa fa-github"></i></a>
+      <a href="https://fab3F.github.io/link/discord"><i class="fa fa-discord" aria-hidden="true"></i></a>
+      
+    </div>
+    <div class="footer-left">
 
-<input type="file" id="dropzone-dialog" style="opacity: 0;display:none">
+      <p class="footer-links">
+        <a class="link-1" href="#home">Home</a>
+        <a href="#projects">Projekte</a>
+        <a href="#contact">Kontakt</a>
+        <a href="/idn">Impressum, Datenschutz & Nutzungsbedingungen</a>
+        <a href="/online-sqlite-viewer" onclick="showCookiePopup()">Datenschutzeinstellungen</a>
+      </p>
+      
+      <p class="footer-emailtext">E-Mail: 
+        <a class="footer-emaillink" href="mailto:kontakt@help.info.gf">kontakt@help.info.gf</a>
+      </p>
+    </div>
+  </footer>
 
-<!-- Footer -->
-<footer id="footer" class="footer-distributed">
-  <div class="footer-right">
-    
-    <a href="https://fab3F.github.io/link/youtube"><i class="fa fa-youtube"></i></a>
-    <a href="https://fab3F.github.io/link/twitter"><i class="fa fa-twitter"></i></a>
-    <a href="https://fab3F.github.io/link/instagram"><i class="fa fa-instagram"></i></a>
-    <a href="https://fab3F.github.io/link/github"><i class="fa fa-github"></i></a>
-    <a href="https://fab3F.github.io/link/discord"><i class="fa fa-discord" aria-hidden="true"></i></a>
-    
-  </div>
-  <div class="footer-left">
-
-    <p class="footer-links">
-      <a class="link-1" href="#home">Home</a>
-      <a href="#projects">Projekte</a>
-      <a href="#contact">Kontakt</a>
-      <a href="/idn">Impressum, Datenschutz & Nutzungsbedingungen</a>
-    </p>
-    
-    <p class="footer-emailtext">E-Mail: 
-      <a class="footer-emaillink" href="mailto:kontakt@help.info.gf">kontakt@help.info.gf</a>
-    </p>
-  </div>
-</footer>
-
-<!-- Scripts -->
-<script src="/online-sqlite-viewer/js/jquery-1.11.3.min.js"></script>
-<script src="/online-sqlite-viewer/js/filereader.js"></script>
-<script src="/online-sqlite-viewer/js/sql.js"></script>
-<script src="/online-sqlite-viewer/js/select2.min.js"></script>
-<script src="/online-sqlite-viewer/js/ace/ace.js"></script>
-<script src="/online-sqlite-viewer/js/bootstrap.min.js"></script>
-<script src="/online-sqlite-viewer/js/mindmup-editabletable.js"></script>
-<script src="/online-sqlite-viewer/js/main.js?v=11"></script>
-<script>
-    function onKeyDown(e) {
-        if ((e.ctrlKey || e.metaKey) && e.which == 13) {
-            executeSql()
-        }
-    }
-</script>
+  <!-- Scripts -->
+  <script src="/online-sqlite-viewer/js/jquery-1.11.3.min.js"></script>
+  <script src="/online-sqlite-viewer/js/filereader.js"></script>
+  <script src="/online-sqlite-viewer/js/sql.js"></script>
+  <script src="/online-sqlite-viewer/js/select2.min.js"></script>
+  <script src="/online-sqlite-viewer/js/ace/ace.js"></script>
+  <script src="/online-sqlite-viewer/js/bootstrap.min.js"></script>
+  <script src="/online-sqlite-viewer/js/mindmup-editabletable.js"></script>
+  <script src="/online-sqlite-viewer/js/main.js?v=11"></script>
+  <script>
+      function onKeyDown(e) {
+          if ((e.ctrlKey || e.metaKey) && e.which == 13) {
+              executeSql()
+          }
+      }
+  </script>
 
 </body>
 </html>
